@@ -26,39 +26,6 @@ A simple quiz portal where teachers generate AI-powered quizzes and students att
 
 ---
 
-## Project Structure
-
-```text
-quiz-portal/
-├── frontend/
-│   ├── index.html       # Landing page
-│   ├── css/
-│   │   └── style.css    # Landing page styles
-│   └── teacher/
-│       ├── signup.html  # Teacher signup
-│       └── login.html   # Teacher login
-│
-└── README.md
-```
-
----
-
-## Progress
-
-| Page | Status |
-|------|--------|
-| Landing Page | Done |
-| Teacher Signup | Done |
-| Teacher Login | Done |
-| Teacher Dashboard | Pending |
-| Generate Quiz | Pending |
-| Student Register | Pending |
-| Student Quiz | Pending |
-| Result Page | Pending |
-| Teacher Records | Pending |
-
----
-
 ## Teacher Flow
 
 1. Signup (Name, Email, Password)
