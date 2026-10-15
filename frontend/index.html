@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Quiz Portal</title>
+  <style>
+    /* ---------- Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    /* ---------- Navbar ---------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #4f46e5;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .logo svg {
+      width: 26px;
+      height: 26px;
+      stroke: #4f46e5;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: #4f46e5;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #4338ca;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #4f46e5;
+      border: 1px solid #4f46e5;
+    }
+
+    .btn-outline:hover {
+      background: #eef2ff;
+    }
+
+    .btn-large {
+      padding: 13px 28px;
+      font-size: 15px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 80px 40px 60px;
+      text-align: center;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 18px;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: #4f46e5;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: #64748b;
+      max-width: 600px;
+      margin: 0 auto 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ---------- Features ---------- */
+    .features {
+      padding: 70px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 30px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 14px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.08);
+      border-color: #c7d2fe;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: #eef2ff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: #4f46e5;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      padding: 70px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      color: #ffffff;
+    }
+
+    .cta h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      font-size: 15px;
+      opacity: 0.9;
+      margin-bottom: 28px;
+    }
+
+    .cta .btn-white {
+      background: #ffffff;
+      color: #4f46e5;
+      padding: 13px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta .btn-white:hover {
+      background: #f1f5f9;
+    }
+
+    /* ---------- Footer ---------- */
+      
+    .footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+  
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 20px;
+      }
+
+      .hero {
+        padding: 50px 20px 40px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 15px;
+      }
+
+      .features,
+      .cta {
+        padding: 50px 20px;
+      }
+
+      .section-title h2 {
+        font-size: 24px;
+      }
+
+      .footer {
+        padding: 40px 20px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar">
+    <div class="logo">
+      <svg viewBox="0 0 24 24">
+        <path d="M22 10L12 5 2 10l10 5 10-5z" />
+        <path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5" />
+      </svg>
+      AI Quiz Portal
+    </div>
+
+    <div class="nav-buttons">
+      <a href="student/join.html" class="btn btn-outline">Student</a>
+      <a href="teacher/login.html" class="btn btn-primary">Teacher</a>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
+    <h1>Smart Quizzes, <span>Smarter Learning</span></h1>
+    <p>
+      Generate AI powered quizzes in seconds, share with students,
+      and track progress all in one simple portal.
+    </p>
+    <div class="hero-buttons">
+      <a href="teacher/login.html" class="btn btn-primary btn-large">
+        Get Started as Teacher
+      </a>
+      <a href="student/join.html" class="btn btn-outline btn-large">
+        Join a Quiz
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="features" id="features">
+    <div class="section-title">
+      <h2>Why Choose AI Quiz Portal?</h2>
+      <p>Everything you need to run smart quizzes, simple and fast.</p>
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3" />
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1" />
+          </svg>
+        </div>
+        <h3>AI Quiz Generation</h3>
+        <p>Type a topic, and Gemini AI instantly creates high quality MCQs for you.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3 2" />
+          </svg>
+        </div>
+        <h3>Timed Quizzes</h3>
+        <p>Set custom time limits. Quiz auto submits when time runs out.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="4" y="3" width="16" height="18" rx="2" />
+            <path d="M9 8h6M9 12h6M9 16h4" />
+          </svg>
+        </div>
+        <h3>Tab Switch Detection</h3>
+        <p>If a student switches tabs during a quiz, it submits automatically.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.5 1.5" />
+            <path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.5-1.5" />
+          </svg>
+        </div>
+        <h3>Easy Sharing</h3>
+        <p>Generate a quiz and share a unique link with students instantly.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 3v18h18" />
+            <path d="M7 14l4-4 3 3 5-6" />
+          </svg>
+        </div>
+        <h3>Student Records</h3>
+        <p>Teachers can view all student attempts, scores, and performance.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 11l3 3 8-8" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+        </div>
+        <h3>Instant Results</h3>
+        <p>Students see their score and AI explanations right after submission.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="cta">
+    <h2>Ready to Create Your First Quiz?</h2>
+    <p>Join as a teacher and generate smart quizzes in seconds.</p>
+    <a href="teacher/login.html" class="btn-white">Start Now</a>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <p>&copy; 2025 AI Quiz Portal. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
